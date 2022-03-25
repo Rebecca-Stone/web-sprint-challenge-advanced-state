@@ -1,95 +1,65 @@
 import React from "react";
 import { connect } from "react-redux";
+import * as actionCreators from "../state/action-creators";
 
-import { moveClockwise, moveCounterClockwise } from "../state/action-creators";
-
-function Wheel(props) {
+export function Wheel(props) {
   const { wheel, moveClockwise, moveCounterClockwise } = props;
 
-  const counterClockWiseClick = () => {
-    switch (wheel) {
-      case 0:
-        return moveCounterClockwise(5);
-      case 1:
-        return moveCounterClockwise(0);
-      case 2:
-        return moveCounterClockwise(1);
-      case 3:
-        return moveCounterClockwise(2);
-      case 4:
-        return moveCounterClockwise(3);
-      case 5:
-        return moveCounterClockwise(4);
-      default:
-        return null;
-    }
+  const clockwiseClick = (evt) => {
+    const { value } = evt.target;
+    moveClockwise(value);
   };
 
-  const clockwiseClick = () => {
-    switch (wheel) {
-      case 0:
-        return moveClockwise(1);
-      case 1:
-        return moveClockwise(2);
-      case 2:
-        return moveClockwise(3);
-      case 3:
-        return moveClockwise(4);
-      case 4:
-        return moveClockwise(5);
-      case 5:
-        return moveClockwise(0);
-      default:
-        return null;
-    }
+  const counterClockwiseClick = (evt) => {
+    const { value } = evt.target;
+    moveCounterClockwise(value);
   };
 
   return (
     <div id="wrapper">
       <div id="wheel">
         <div
-          className={`cog ${wheel === 0 ? "active" : null}`}
+          className={`${wheel === 0 ? "cog active" : "cog"}`}
           style={{ "--i": 0 }}
         >
-          {wheel === 0 ? "B" : null}
+          {wheel === 0 ? "B" : ""}
         </div>
         <div
-          className={`cog ${wheel === 1 ? "active" : null}`}
+          className={`${wheel === 1 ? "cog active" : "cog"}`}
           style={{ "--i": 1 }}
         >
-          {wheel === 1 ? "B" : null}
+          {wheel === 1 ? "B" : ""}
         </div>
         <div
-          className={`cog ${wheel === 2 ? "active" : null}`}
+          className={`${wheel === 2 ? "cog active" : "cog"}`}
           style={{ "--i": 2 }}
         >
-          {wheel === 2 ? "B" : null}
+          {wheel === 2 ? "B" : ""}
         </div>
         <div
-          className={`cog ${wheel === 3 ? "active" : null}`}
+          className={`${wheel === 3 ? "cog active" : "cog"}`}
           style={{ "--i": 3 }}
         >
-          {wheel === 3 ? "B" : null}
+          {wheel === 3 ? "B" : ""}
         </div>
         <div
-          className={`cog ${wheel === 4 ? "active" : null}`}
+          className={`${wheel === 4 ? "cog active" : "cog"}`}
           style={{ "--i": 4 }}
         >
-          {wheel === 4 ? "B" : null}
+          {wheel === 4 ? "B" : ""}
         </div>
         <div
-          className={`cog ${wheel === 5 ? "active" : null}`}
+          className={`${wheel === 5 ? "cog active" : "cog"}`}
           style={{ "--i": 5 }}
         >
-          {wheel === 5 ? "B" : null}
+          {wheel === 5 ? "B" : ""}
         </div>
-        {/* --i is a custom CSS property, no need to touch that nor the style object */}
       </div>
       <div id="keypad">
-        <button id="counterClockwiseBtn" onClick={counterClockWiseClick}>
+        <button onClick={counterClockwiseClick} id="counterClockwiseBtn">
           Counter clockwise
         </button>
-        <button id="clockwiseBtn" onClick={clockwiseClick}>
+        <button onClick={clockwiseClick} id="clockwiseBtn">
           Clockwise
         </button>
       </div>
@@ -97,13 +67,4 @@ function Wheel(props) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    wheel: state.wheel,
-  };
-};
-
-export default connect(mapStateToProps, {
-  moveClockwise,
-  moveCounterClockwise,
-})(Wheel);
+export default connect((state) => state, actionCreators)(Wheel);
