@@ -8,16 +8,16 @@ import {
   SET_SELECTED_ANSWER,
 } from "./action-types";
 // ❗ You don't need to add extra action creators to achieve MVP
-export function moveClockwise() {
-  return { type: MOVE_CLOCKWISE };
+export function moveClockwise(nextId) {
+  return { type: MOVE_CLOCKWISE, payload: nextId };
 }
 
-export function moveCounterClockwise() {
-  return { type: MOVE_COUNTERCLOCKWISE };
+export function moveCounterClockwise(nextId) {
+  return { type: MOVE_COUNTERCLOCKWISE, payload: nextId };
 }
 
 export function selectAnswer() {
-  return { type: SET_SELECTED_ANSWER}
+  return { type: SET_SELECTED_ANSWER };
 }
 
 export function setMessage() {
@@ -25,7 +25,7 @@ export function setMessage() {
 }
 
 export function setQuiz() {
-  return { type: SET_QUIZ_INTO_STATE }
+  return { type: SET_QUIZ_INTO_STATE };
 }
 
 export function inputChange({ name, value }) {
@@ -44,8 +44,7 @@ export function fetchQuiz() {
         console.log(res.data.data);
       })
       .catch((err) => {
-        dispatch(
-          setMessage(err.response.data.message));
+        dispatch(setMessage(err.response.data.message));
       });
     // First, dispatch an action to reset the quiz state (so the "Loading next quiz..." message can display)
     // On successful GET:
