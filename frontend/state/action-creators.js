@@ -16,8 +16,8 @@ export function moveCounterClockwise(nextId) {
   return { type: MOVE_COUNTERCLOCKWISE, payload: nextId };
 }
 
-export function selectAnswer() {
-  return { type: SET_SELECTED_ANSWER };
+export function selectAnswer(answer_id) {
+  return { type: SET_SELECTED_ANSWER, payload: answer_id };
 }
 
 export function setMessage() {
@@ -25,7 +25,7 @@ export function setMessage() {
 }
 
 export function setQuiz() {
-  return { type: SET_QUIZ_INTO_STATE };
+  return { type: SET_QUIZ_INTO_STATE }
 }
 
 export function inputChange({ name, value }) {
@@ -44,7 +44,8 @@ export function fetchQuiz() {
         console.log(res.data.data);
       })
       .catch((err) => {
-        dispatch(setMessage(err.response.data.message));
+        dispatch(
+          setMessage(err.response.data.message));
       });
     // First, dispatch an action to reset the quiz state (so the "Loading next quiz..." message can display)
     // On successful GET:
