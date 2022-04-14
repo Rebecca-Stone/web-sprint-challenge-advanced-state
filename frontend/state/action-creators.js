@@ -44,9 +44,9 @@ export function fetchQuiz() {
       .then((res) => {
         dispatch(setQuiz(res.data));
       })
-      .catch((err) => {
-        debugger;
-      });
+      // .catch((err) => {
+        // debugger;
+      // });
   };
 }
 export function postAnswer({ quiz_id, answer_id }) {
@@ -59,9 +59,9 @@ export function postAnswer({ quiz_id, answer_id }) {
         dispatch(fetchQuiz());
         dispatch(setMessage(res.data.message));
       })
-      .catch((err) => {
-        debugger;
-      });
+      // .catch((err) => {
+        // debugger;
+      // });
   };
 }
 export function postQuiz({
@@ -82,8 +82,8 @@ export function postQuiz({
         );
         dispatch(resetForm());
       })
-      .catch((err) => {
-        debugger;
-      });
+      // .catch((err) => {
+        // debugger;
+      // });
   };
 }
